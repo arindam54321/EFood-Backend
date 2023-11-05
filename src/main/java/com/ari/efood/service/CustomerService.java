@@ -11,4 +11,8 @@ public interface CustomerService {
     CustomerDto addCustomer(CustomerDto customer) throws CustomerException;
 
     String deleteCustomer(String email) throws CustomerException;
+
+    boolean doesCustomerExist(String email);
+
+    CustomerDto getCustomer(String email) throws CustomerException;
 }

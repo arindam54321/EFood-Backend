@@ -29,6 +29,24 @@ public class CustomerApi {
         return ResponseWrapper.entity(response, status);
     }
 
+    @GetMapping(value = "exists")
+    public ResponseEntity<ResponseWrapper<Boolean>> doesCustomerExist(
+            @Email(message = "Enter a valid email") @RequestParam(value = "email") String email
+    ) {
+        Boolean response = service.doesCustomerExist(email);
+        HttpStatus status = response ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(response, status);
+    }
+
+    @GetMapping(value = "get")
+    public ResponseEntity<ResponseWrapper<CustomerDto>> getCustomer(
+            @Email(message = "Enter a valid email") @RequestParam(value = "email") String email
+    ) throws CustomerException {
+        CustomerDto response = service.getCustomer(email);
+        HttpStatus status = HttpStatus.OK;
+        return ResponseWrapper.entity(response, status);
+    }
+
     @PostMapping(value = "add")
     public ResponseEntity<ResponseWrapper<CustomerDto>> addCustomer(
             @RequestBody @Valid CustomerDto customer

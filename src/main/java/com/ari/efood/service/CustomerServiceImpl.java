@@ -42,4 +42,19 @@ public class CustomerServiceImpl implements CustomerService {
         repository.delete(customer.get());
         return "Customer deleted with Email: " + email;
     }
+
+    @Override
+    public boolean doesCustomerExist(String email) {
+        Optional<Customer> customer = repository.findByEmail(email);
+        return customer.isPresent();
+    }
+
+    @Override
+    public CustomerDto getCustomer(String email) throws CustomerException {
+        Optional<Customer> customer = repository.findByEmail(email);
+        if (customer.isEmpty()) {
+            throw new CustomerException("No customer found with the given email id");
+        }
+        return customer.get().fromEntity();
+    }
 }
