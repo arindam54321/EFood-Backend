@@ -1,5 +1,6 @@
 package com.ari.efood.service;
 
+import com.ari.efood.dto.CustomerOtpDto;
 import com.ari.efood.exception.CustomerOtpException;
 import com.ari.efood.model.CustomerOtp;
 import com.ari.efood.repository.CustomerOtpRepository;
@@ -29,26 +30,31 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     }
 
     @Override
-    public String generateOtp(String email) {
+    public CustomerOtpDto generateOtp(String email) {
         Integer otp = CustomerOtpServiceImpl.getOtp();
+        Long validTill = System.currentTimeMillis() + CustomerOtpService.VALID_FOR_IN_SECONDS * 1000;
         Optional<CustomerOtp> customerOtp = repository.findByEmail(email);
         CustomerOtp data;
         if (customerOtp.isPresent()) {
             data = customerOtp.get();
             data.setOtp(otp);
         } else {
-            data = CustomerOtp.builder().email(email).otp(otp).build();
+            data = CustomerOtp.builder().email(email).otp(otp).validTill(validTill).build();
         }
         repository.save(data);
 
         this.sendOtp(email, otp);
-        return "OTP sent successfully";
+        return CustomerOtpDto.builder()
+                .email(email)
+                .validFor(CustomerOtpService.VALID_FOR_IN_SECONDS)
+                .build();
     }
 
     @Override
     public String validateOtp(String email, Integer otp) throws CustomerOtpException {
         Optional<CustomerOtp> customerOtp = repository.findByEmailAndOtp(email, otp);
-        if (customerOtp.isPresent()) {
+        if (customerOtp.isPresent() &&
+            customerOtp.get().getValidTill() >= System.currentTimeMillis()) {
             return "OTP validated";
         } else {
             throw new CustomerOtpException("OTP invalid");

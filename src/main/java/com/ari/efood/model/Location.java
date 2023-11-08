@@ -1,5 +1,6 @@
 package com.ari.efood.model;
 
+import com.ari.efood.dto.LocationDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,13 +14,19 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class CustomerOtp {
+public class Location {
     @Id
-    String id;
+    String pin;
     @Field
-    String email;
+    String name;
     @Field
-    Integer otp;
-    @Field
-    Long validTill;
+    String state;
+
+    public LocationDto toDto() {
+        return LocationDto.builder()
+                .pin(this.pin)
+                .name(this.name)
+                .state(this.state)
+                .build();
+    }
 }

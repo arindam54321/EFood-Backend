@@ -26,7 +26,7 @@ public class Customer {
     @Field
     String mobile;
 
-    public CustomerDto fromEntity() {
+    public CustomerDto toDto() {
         return CustomerDto.builder()
                 .id(this.id)
                 .email(this.email)

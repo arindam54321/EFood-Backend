@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDto> getAll() {
-        return repository.findAll().stream().map(Customer::fromEntity).toList();
+        return repository.findAll().stream().map(Customer::toDto).toList();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerException("Customer already found with given email id");
         }
 
-        return repository.save(customer.toEntity()).fromEntity();
+        return repository.save(customer.toEntity()).toDto();
     }
 
     @Override
@@ -55,6 +55,6 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer.isEmpty()) {
             throw new CustomerException("No customer found with the given email id");
         }
-        return customer.get().fromEntity();
+        return customer.get().toDto();
     }
 }
