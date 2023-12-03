@@ -1,11 +1,15 @@
 package com.ari.efood.controller;
 
+import com.ari.efood.auth.JWTUtils;
 import com.ari.efood.dto.CustomerDto;
+import com.ari.efood.enums.Role;
 import com.ari.efood.exception.CustomerException;
 import com.ari.efood.service.CustomerService;
 import com.ari.efood.utils.ResponseWrapper;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import org.jose4j.lang.JoseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,20 +44,28 @@ public class CustomerApi {
 
     @GetMapping(value = "get")
     public ResponseEntity<ResponseWrapper<CustomerDto>> getCustomer(
-            @Email(message = "Enter a valid email") @RequestParam(value = "email") String email
-    ) throws CustomerException {
+            @Email(message = "Enter a valid email") @RequestParam(value = "email") String email,
+            HttpServletResponse httpServletResponse
+    ) throws CustomerException, JoseException {
         CustomerDto response = service.getCustomer(email);
         HttpStatus status = HttpStatus.OK;
-        return ResponseWrapper.entity(response, status);
+
+        String jwt = JWTUtils.generateJWT(response.getId(), "", response.getEmail(), Role.CUSTOMER);
+        httpServletResponse.setHeader(JWTUtils.JWT_HEADER_KEY, jwt);
+        return ResponseWrapper.entity(response, status, httpServletResponse.getHeaders(JWTUtils.JWT_HEADER_KEY));
     }
 
     @PostMapping(value = "add")
     public ResponseEntity<ResponseWrapper<CustomerDto>> addCustomer(
-            @RequestBody @Valid CustomerDto customer
-    ) throws CustomerException {
+            @RequestBody @Valid CustomerDto customer,
+            HttpServletResponse httpServletResponse
+    ) throws CustomerException, JoseException {
         CustomerDto response = service.addCustomer(customer);
         HttpStatus status = HttpStatus.OK;
-        return ResponseWrapper.entity(response, status);
+
+        String jwt = JWTUtils.generateJWT(response.getId(), "", response.getEmail(), Role.CUSTOMER);
+        httpServletResponse.setHeader(JWTUtils.JWT_HEADER_KEY, jwt);
+        return ResponseWrapper.entity(response, status, httpServletResponse.getHeaders(JWTUtils.JWT_HEADER_KEY));
     }
 
     @DeleteMapping(value = "delete")

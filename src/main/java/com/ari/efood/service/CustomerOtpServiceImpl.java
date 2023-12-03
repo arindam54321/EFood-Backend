@@ -38,8 +38,13 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
         if (customerOtp.isPresent()) {
             data = customerOtp.get();
             data.setOtp(otp);
+            data.setValidTill(validTill);
         } else {
-            data = CustomerOtp.builder().email(email).otp(otp).validTill(validTill).build();
+            data = CustomerOtp.builder()
+                    .email(email)
+                    .otp(otp)
+                    .validTill(validTill)
+                    .build();
         }
         repository.save(data);
 

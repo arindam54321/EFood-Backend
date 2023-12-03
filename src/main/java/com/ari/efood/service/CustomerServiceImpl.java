@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -56,5 +57,14 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerException("No customer found with the given email id");
         }
         return customer.get().toDto();
+    }
+
+    @Override
+    public boolean doesExists(String id, String name, String email) {
+        Optional<Customer> customer = repository.findByEmail(email);
+        if (customer.isEmpty() || !Objects.equals(customer.get().getId(), id)) {
+            return false;
+        }
+        return true;
     }
 }

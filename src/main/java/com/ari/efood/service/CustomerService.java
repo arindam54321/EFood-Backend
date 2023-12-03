@@ -15,4 +15,6 @@ public interface CustomerService {
     boolean doesCustomerExist(String email);
 
     CustomerDto getCustomer(String email) throws CustomerException;
+
+    boolean doesExists(String id, String name, String email);
 }
