@@ -7,6 +7,7 @@ import com.ari.efood.repository.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,5 +24,11 @@ public class LocationServiceImpl implements LocationService {
         }
 
         return repository.save(locationDto.toEntity()).toDto();
+    }
+
+    @Override
+    public List<LocationDto> getAllLocations() {
+        List<Location> locations = repository.findAll();
+        return locations.stream().map(Location::toDto).toList();
     }
 }

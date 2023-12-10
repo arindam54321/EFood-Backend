@@ -4,6 +4,7 @@ import com.ari.efood.auth.JWTUtils;
 import com.ari.efood.enums.Role;
 import com.ari.efood.exception.JWTException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,16 @@ import java.util.stream.Stream;
 @Service
 public class JWTValidatorService extends JWTUtils {
     @Autowired
-    private CustomerServiceImpl customerService;
+    private CustomerService customerService;
+    @Autowired
+    private AdminService adminService;
+
+    @Value("${admin.field.username}")
+    private String adminUsernameField;
+    @Value("${admin.field.password}")
+    private String adminPasswordField;
+    @Value("${admin.field.mfa}")
+    private String adminMFAField;
 
     public void validate(String token, Role... expectedRole) throws JWTException {
         try {
@@ -26,13 +36,19 @@ public class JWTValidatorService extends JWTUtils {
             String role = String.valueOf(jwtMap.get(JWTUtils.JWT_ROLE_KEY));
 
             if (expectedRole.length != 0) {
-                List<String> roles = Stream.of(expectedRole).map(Role::getRole).toList();
+                List<String> roles = Stream.of(expectedRole).map(Role::getTYPE).toList();
+                if (roles.contains(Role.ADMIN.getTYPE())) {
+                    isValid = validateAdmin(jwtMap);
+                    if (isValid) {
+                        return;
+                    }
+                }
                 if (!roles.contains(role)) {
                     throw new JWTException("Authentication Failed");
                 }
             }
 
-            if (Objects.equals(role, Role.CUSTOMER.getRole())) {
+            if (Objects.equals(role, Role.CUSTOMER.getTYPE())) {
                 isValid = customerService.doesExists(id, name, email);
             }
 
@@ -43,5 +59,12 @@ public class JWTValidatorService extends JWTUtils {
         } catch (Exception e) {
             throw new JWTException("Authentication Failed");
         }
+    }
+
+    private boolean validateAdmin(Map<String, Object> jwtMap) {
+        String username = String.valueOf(jwtMap.get(adminUsernameField));
+        String password = String.valueOf(jwtMap.get(adminPasswordField));
+        String mfa = String.valueOf(jwtMap.get(adminMFAField));
+        return adminService.doesExist(username, password, mfa);
     }
 }

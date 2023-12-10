@@ -1,9 +1,6 @@
 package com.ari.efood.utils;
 
-import com.ari.efood.exception.CustomerException;
-import com.ari.efood.exception.CustomerOtpException;
-import com.ari.efood.exception.JWTException;
-import com.ari.efood.exception.LocationException;
+import com.ari.efood.exception.*;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -43,6 +40,13 @@ public class CustomExceptionHandlers {
     public ResponseEntity<ResponseWrapper<String>> handleJWTException(JWTException e) {
         String message = e.getMessage();
         HttpStatus status = HttpStatus.UNAUTHORIZED;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(AdminException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleAdminException(AdminException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         return ResponseWrapper.entity(message, status);
     }
 

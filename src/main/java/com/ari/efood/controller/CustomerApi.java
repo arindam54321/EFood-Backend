@@ -4,7 +4,9 @@ import com.ari.efood.auth.JWTUtils;
 import com.ari.efood.dto.CustomerDto;
 import com.ari.efood.enums.Role;
 import com.ari.efood.exception.CustomerException;
+import com.ari.efood.exception.JWTException;
 import com.ari.efood.service.CustomerService;
+import com.ari.efood.service.JWTValidatorService;
 import com.ari.efood.utils.ResponseWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -25,9 +27,14 @@ import java.util.List;
 public class CustomerApi {
     @Autowired
     private CustomerService service;
+    @Autowired
+    private JWTValidatorService jwtValidatorService;
 
     @GetMapping(value = "all")
-    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer() {
+    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer(
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt
+    ) throws JWTException {
+        jwtValidatorService.validate(jwt);
         List<CustomerDto> response = service.getAll();
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);
@@ -70,8 +77,10 @@ public class CustomerApi {
 
     @DeleteMapping(value = "delete")
     public ResponseEntity<ResponseWrapper<String>> deleteCustomer(
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt,
             @Email(message = "Enter a valid email") @RequestParam(value = "email") String email
-    ) throws CustomerException {
+    ) throws CustomerException, JWTException {
+        jwtValidatorService.validate(jwt);
         String response = service.deleteCustomer(email);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);

@@ -1,12 +1,15 @@
 package com.ari.efood.enums;
 
-public enum Role {
-    ADMIN("admin"),
-    CUSTOMER("customer");
+public enum Food {
+    PIZZA("pizza"),
+    BURGER("burger"),
+    BIRYANI("biryani"),
+    CHINESE("chinese"),
+    MOMOS("momos");
 
     private final String TYPE;
 
-    Role(String TYPE) {
+    Food(String TYPE) {
         this.TYPE = TYPE;
     }
 

@@ -33,7 +33,7 @@ public class JWTUtils {
         claims.setStringClaim(JWT_ID_KEY, id);
         claims.setStringClaim(JWT_NAME_KEY, name);
         claims.setStringClaim(JWT_EMAIL_KEY, email);
-        claims.setStringClaim(JWT_ROLE_KEY, role.getRole());
+        claims.setStringClaim(JWT_ROLE_KEY, role.getTYPE());
 
         JsonWebSignature jws = new JsonWebSignature();
         jws.setAlgorithmConstraints(AlgorithmConstraints.NO_CONSTRAINTS);
