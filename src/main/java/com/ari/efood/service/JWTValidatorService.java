@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 @Service
 public class JWTValidatorService extends JWTUtils {
     @Autowired
-    private CustomerService customerService;
-    @Autowired
     private AdminService adminService;
+    @Autowired
+    private CustomerService customerService;
 
     @Value("${admin.field.username}")
     private String adminUsernameField;

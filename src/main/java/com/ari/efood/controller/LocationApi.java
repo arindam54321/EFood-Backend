@@ -2,6 +2,7 @@ package com.ari.efood.controller;
 
 import com.ari.efood.auth.JWTUtils;
 import com.ari.efood.dto.LocationDto;
+import com.ari.efood.enums.Role;
 import com.ari.efood.exception.JWTException;
 import com.ari.efood.exception.LocationException;
 import com.ari.efood.service.JWTValidatorService;
@@ -28,21 +29,29 @@ public class LocationApi {
 
     @PostMapping(value = "add")
     public ResponseEntity<ResponseWrapper<LocationDto>> addLocation(
-            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt,
-            @Valid @RequestBody LocationDto locationDto
+            @Valid @RequestBody LocationDto locationDto,
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token
     ) throws LocationException, JWTException {
-        jwtValidatorService.validate(jwt);
+        jwtValidatorService.validate(token, Role.ADMIN);
         LocationDto response = service.addLocation(locationDto);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);
     }
 
     @GetMapping(value = "getall")
-    public ResponseEntity<ResponseWrapper<List<LocationDto>>> getAllLocations(
-            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt
-    ) throws JWTException {
-        jwtValidatorService.validate(jwt);
+    public ResponseEntity<ResponseWrapper<List<LocationDto>>> getAllLocations() throws JWTException {
         List<LocationDto> response = service.getAllLocations();
+        HttpStatus status = HttpStatus.OK;
+        return ResponseWrapper.entity(response, status);
+    }
+
+    @DeleteMapping(value = "delete")
+    public ResponseEntity<ResponseWrapper<String>> deleteLocation(
+            String pin,
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token
+    ) throws LocationException, JWTException {
+        jwtValidatorService.validate(token, Role.ADMIN);
+        String response = service.deleteLocation(pin);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);
     }

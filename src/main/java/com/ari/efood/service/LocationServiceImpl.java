@@ -31,4 +31,21 @@ public class LocationServiceImpl implements LocationService {
         List<Location> locations = repository.findAll();
         return locations.stream().map(Location::toDto).toList();
     }
+
+    @Override
+    public String deleteLocation(String pin) throws LocationException {
+        Optional<Location> location = repository.findById(pin);
+
+        if (location.isEmpty()) {
+            throw new LocationException("No Location found with the given PIN");
+        }
+
+        repository.delete(location.get());
+        return "Location deleted with PIN: " + pin;
+    }
+
+    @Override
+    public boolean doesExist(String pin) {
+        return repository.existsById(pin);
+    }
 }

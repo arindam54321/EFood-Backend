@@ -31,10 +31,7 @@ public class CustomerApi {
     private JWTValidatorService jwtValidatorService;
 
     @GetMapping(value = "all")
-    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer(
-            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt
-    ) throws JWTException {
-        jwtValidatorService.validate(jwt);
+    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer() throws JWTException {
         List<CustomerDto> response = service.getAll();
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);
@@ -77,10 +74,10 @@ public class CustomerApi {
 
     @DeleteMapping(value = "delete")
     public ResponseEntity<ResponseWrapper<String>> deleteCustomer(
-            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt,
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token,
             @Email(message = "Enter a valid email") @RequestParam(value = "email") String email
     ) throws CustomerException, JWTException {
-        jwtValidatorService.validate(jwt);
+        jwtValidatorService.validate(token, Role.ADMIN);
         String response = service.deleteCustomer(email);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);

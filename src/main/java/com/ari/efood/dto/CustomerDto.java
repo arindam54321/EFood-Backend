@@ -3,6 +3,7 @@ package com.ari.efood.dto;
 import com.ari.efood.model.Customer;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import org.hibernate.validator.constraints.Length;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerDto {
+    @Null(message = "ID should be auto-generated")
     String id;
 
     @NotNull(message = "Email should not be NULL")

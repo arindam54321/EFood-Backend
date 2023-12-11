@@ -8,6 +8,7 @@ import com.ari.efood.exception.JWTException;
 import com.ari.efood.service.AdminService;
 import com.ari.efood.service.JWTValidatorService;
 import com.ari.efood.utils.ResponseWrapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,10 @@ public class AdminApi {
 
     @PostMapping(value = "add")
     public ResponseEntity<ResponseWrapper<AdminDto>> addAdmin(
-            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String jwt,
-            @RequestBody AdminDto admin
+            @Valid @RequestBody AdminDto admin,
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token
     ) throws AdminException, JWTException {
-        jwtValidatorService.validate(jwt, Role.ADMIN);
+        jwtValidatorService.validate(token, Role.ADMIN);
         AdminDto response = service.add(admin);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);

@@ -9,4 +9,8 @@ public interface LocationService {
     LocationDto addLocation(LocationDto locationDto) throws LocationException;
 
     List<LocationDto> getAllLocations();
+
+    String deleteLocation(String pin) throws LocationException;
+
+    boolean doesExist(String pin);
 }

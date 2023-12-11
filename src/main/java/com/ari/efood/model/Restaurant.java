@@ -1,5 +1,6 @@
 package com.ari.efood.model;
 
+import com.ari.efood.dto.RestaurantDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,12 @@ public class Restaurant {
     String name;
     @Field
     String location;
+
+    public RestaurantDto toDto() {
+        return RestaurantDto.builder()
+                .id(this.id)
+                .name(this.name)
+                .location(this.location)
+                .build();
+    }
 }
