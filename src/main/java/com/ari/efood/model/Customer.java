@@ -16,15 +16,15 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class Customer {
     @Id
-    String id;
+    private String id;
     @Field
-    String email;
+    private String email;
     @Field
-    String firstName;
+    private String firstName;
     @Field
-    String lastName;
+    private String lastName;
     @Field
-    String mobile;
+    private String mobile;
 
     public CustomerDto toDto() {
         return CustomerDto.builder()

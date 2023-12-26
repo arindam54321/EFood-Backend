@@ -16,11 +16,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class Location {
     @Id
-    String pin;
+    private String pin;
     @Field
-    String name;
+    private String name;
     @Field
-    String state;
+    private String state;
 
     public LocationDto toDto() {
         return LocationDto.builder()

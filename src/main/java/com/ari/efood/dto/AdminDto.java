@@ -14,16 +14,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AdminDto {
     @Null(message = "ID should be auto-generated")
-    String id;
+    private String id;
 
     @NotNull(message = "Username should not be NULL")
-    String username;
+    private String username;
 
     @NotNull(message = "Password should not be NULL")
-    String password;
+    private String password;
 
     @NotNull(message = "MFA should not be NULL")
-    String mfa;
+    private String mfa;
 
     public Admin toEntity() {
         return Admin.builder()

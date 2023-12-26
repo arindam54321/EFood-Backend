@@ -16,13 +16,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class Admin {
     @Id
-    String id;
+    private String id;
     @Field
-    String username;
+    private String username;
     @Field
-    String password;
+    private String password;
     @Field
-    String mfa;
+    private String mfa;
 
     public AdminDto toDto() {
         return AdminDto.builder()

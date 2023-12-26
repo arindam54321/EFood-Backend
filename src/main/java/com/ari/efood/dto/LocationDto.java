@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 public class LocationDto {
     @NotNull(message = "PIN should be present")
     @Pattern(regexp = "[1-9][0-9]{5}", message = "PIN should be 6 digit numeric")
-    String pin;
+    private String pin;
 
     @NotNull(message = "Name should not be NULL")
-    String name;
+    private String name;
 
     @NotNull(message = "State name should not be NULL")
-    String state;
+    private String state;
 
     public Location toEntity() {
         return Location.builder()

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
@@ -47,5 +48,26 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         repository.deleteById(id);
         return "Restaurant deleted with ID: " + id;
+    }
+
+    @Override
+    public boolean doesExist(String id) {
+        return repository.existsById(id);
+    }
+
+    @Override
+    public Optional<RestaurantDto> getById(String id) {
+        if (this.doesExist(id)) {
+            return Optional.of(repository.findById(id).get().toDto());
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public RestaurantDto findById(String id) throws RestaurantException {
+        if (this.doesExist(id)) {
+            return repository.findById(id).get().toDto();
+        }
+        throw new RestaurantException("No Restaurant found with the given ID");
     }
 }

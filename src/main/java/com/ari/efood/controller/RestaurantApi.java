@@ -9,7 +9,6 @@ import com.ari.efood.service.RestaurantService;
 import com.ari.efood.utils.ResponseWrapper;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +34,19 @@ public class RestaurantApi {
         return ResponseWrapper.entity(response, status);
     }
 
-    @GetMapping(value = "get/{location}")
+    @GetMapping(value = "findbyid")
+    public ResponseEntity<ResponseWrapper<RestaurantDto>> findById(
+            @RequestParam(value = "id") String id
+    ) throws RestaurantException {
+        RestaurantDto response = service.findById(id);
+        HttpStatus status = HttpStatus.OK;
+        return ResponseWrapper.entity(response, status);
+    }
+
+    @GetMapping(value = "findbylocation")
     public ResponseEntity<ResponseWrapper<List<RestaurantDto>>> getByLocation(
             @Pattern(regexp = "[1-9][0-9]{5}", message = "Location PIN should be 6 digit numeric")
-            @PathParam(value = "location")String location
+            @RequestParam(value = "location") String location
     ) {
         List<RestaurantDto> response = service.getByLocation(location);
         HttpStatus status = HttpStatus.OK;

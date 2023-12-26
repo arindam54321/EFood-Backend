@@ -16,11 +16,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class Restaurant {
     @Id
-    String id;
+    private String id;
     @Field
-    String name;
+    private String name;
     @Field
-    String location;
+    private String location;
 
     public RestaurantDto toDto() {
         return RestaurantDto.builder()

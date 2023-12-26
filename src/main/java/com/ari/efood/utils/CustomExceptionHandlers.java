@@ -57,6 +57,13 @@ public class CustomExceptionHandlers {
         return ResponseWrapper.entity(message, status);
     }
 
+    @ExceptionHandler(FoodException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleFoodException(FoodException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseWrapper<List<String>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<String> data = e.getFieldErrors()

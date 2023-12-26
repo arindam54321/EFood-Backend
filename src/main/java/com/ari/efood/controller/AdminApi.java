@@ -22,7 +22,7 @@ public class AdminApi {
     @Autowired
     private JWTValidatorService jwtValidatorService;
 
-    @PostMapping(value = "add")
+//    @PostMapping(value = "add")
     public ResponseEntity<ResponseWrapper<AdminDto>> addAdmin(
             @Valid @RequestBody AdminDto admin,
             @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token

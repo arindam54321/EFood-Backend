@@ -71,12 +71,14 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
         String body = """
                 Dear Customer,
                 <br><br>
-                Your OTP for login/signup in EFood application is <span style="color:red">%1$d</span>
+                Your OTP for login/signup in EFood application is <span style="color:green">%1$d</span>
+                <br>
+                OTP valid for <span style="color:green">%2$d Minutes</span>
                 <br>
                 Use this OTP to validate your email. Don't share this email to anyone.
                 <br>
                 <h6>Don't reply to this email</h6>
-                """.formatted(otp);
+                """.formatted(otp, CustomerOtpService.VALID_FOR_IN_SECONDS / 60);
 
         CompletableFuture.runAsync(() -> {
             try {

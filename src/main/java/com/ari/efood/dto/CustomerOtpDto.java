@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerOtpDto {
-    String email;
-    Integer validFor;
+    private String email;
+    private Integer validFor;
 }

@@ -14,14 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RestaurantDto {
     @NotNull(message = "ID must not be null")
-    String id;
+    @Pattern(regexp = "[0-9A-Z]{1,10}", message = "ID must contain only capital latin letters or numbers, and length must be less than or equal 10")
+    private String id;
 
     @NotNull(message = "Name must not be null")
-    String name;
+    private String name;
 
     @NotNull(message = "Location PIN must not be null")
     @Pattern(regexp = "[1-9][0-9]{5}", message = "Location PIN should be 6 digit numeric")
-    String location;
+    private String location;
 
     public Restaurant toEntity() {
         return Restaurant.builder()
