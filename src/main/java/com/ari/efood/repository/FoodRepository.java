@@ -10,4 +10,5 @@ import java.util.List;
 public interface FoodRepository extends MongoRepository<Food, String> {
     List<Food> findByRestaurant(String restaurant);
     List<Food> findByType(com.ari.efood.enums.Food food);
+    List<Food> findByTypeAndPin(com.ari.efood.enums.Food type, String location);
 }

@@ -10,6 +10,7 @@ import com.ari.efood.service.FoodService;
 import com.ari.efood.service.JWTValidatorService;
 import com.ari.efood.utils.ResponseWrapper;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,17 @@ public class FoodApi {
     @GetMapping(value = "getall")
     public ResponseEntity<ResponseWrapper<List<FoodDto>>> getAll() {
         List<FoodDto> response = service.getAll();
+        HttpStatus status = HttpStatus.OK;
+        return ResponseWrapper.entity(response, status);
+    }
+
+    @GetMapping(value = "findbytypeandlocation")
+    public ResponseEntity<ResponseWrapper<List<FoodDto>>> findByTypeAndLocation(
+            @RequestParam(value = "type") Food type,
+            @Pattern(regexp = "[1-9][0-9]{5}", message = "Location PIN should be 6 digit numeric")
+            @RequestParam(value = "location") String location
+    ) {
+        List<FoodDto> response = service.findByTypeAndLocation(type, location);
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);
     }

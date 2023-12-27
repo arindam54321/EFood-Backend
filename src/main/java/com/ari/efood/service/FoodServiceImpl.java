@@ -56,4 +56,9 @@ public class FoodServiceImpl implements FoodService {
         }
         return repository.findById(id).get().toDto();
     }
+
+    @Override
+    public List<FoodDto> findByTypeAndLocation(com.ari.efood.enums.Food type, String location) {
+        return repository.findByTypeAndPin(type, location).stream().map(Food::toDto).toList();
+    }
 }
