@@ -67,6 +67,16 @@ public class FoodApi {
         return ResponseWrapper.entity(response, status);
     }
 
+    @GetMapping(value = "findbylocation")
+    public ResponseEntity<ResponseWrapper<List<FoodDto>>> findByLocation(
+            @Pattern(regexp = "[1-9][0-9]{5}", message = "Location PIN should be 6 digit numeric")
+            @RequestParam(value = "location") String location
+    ) {
+        List<FoodDto> response = service.findByLocation(location);
+        HttpStatus status = HttpStatus.OK;
+        return ResponseWrapper.entity(response, status);
+    }
+
     @GetMapping(value = "findbyrestaurant")
     public ResponseEntity<ResponseWrapper<List<FoodDto>>> getByRestaurant(
             @RequestParam(name = "restaurant") String restaurant

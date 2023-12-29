@@ -18,4 +18,6 @@ public interface FoodService {
     FoodDto findById(String id) throws FoodException;
 
     List<FoodDto> findByTypeAndLocation(Food type, String location);
+
+    List<FoodDto> findByLocation(String location);
 }

@@ -20,7 +20,7 @@ public class JWTUtils {
     protected static final String JWT_NAME_KEY = "name";
     protected static final String JWT_EMAIL_KEY = "email";
     protected static final String JWT_ROLE_KEY = "role";
-    protected static final float JWT_VALID_FOR_DAYS = 7;
+    protected static final float JWT_VALID_FOR_DAYS = 90;
     protected static final float JWT_VALID_FOR_HOURS = JWT_VALID_FOR_DAYS * 24;
     protected static final float JWT_VALID_FOR_MINUTES = JWT_VALID_FOR_HOURS * 60;
 
