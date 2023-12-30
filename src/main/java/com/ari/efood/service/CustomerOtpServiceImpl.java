@@ -67,7 +67,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     }
 
     private void sendOtp(String email, Integer otp) {
-        String subject = "[%1$d] : EFood login/signup OTP".formatted(otp);
+        String subject = "[%1$d] : HungryHub login/signup OTP".formatted(otp);
         String body = """
                 Dear Customer,
                 <br><br>
@@ -77,7 +77,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
                 <br>
                 Use this OTP to validate your email. Don't share this email to anyone.
                 <br>
-                <h6>Don't reply to this email</h6>
+                <h6>This email is system generated. Don't reply to this email</h6>
                 """.formatted(otp, CustomerOtpService.VALID_FOR_IN_SECONDS / 60);
 
         CompletableFuture.runAsync(() -> {
