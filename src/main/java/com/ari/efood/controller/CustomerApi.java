@@ -31,7 +31,10 @@ public class CustomerApi {
     private JWTValidatorService jwtValidatorService;
 
     @GetMapping(value = "all")
-    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer() throws JWTException {
+    public ResponseEntity<ResponseWrapper<List<CustomerDto>>> getAllCustomer(
+            @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token
+    ) throws JWTException {
+        jwtValidatorService.validate(token, Role.ADMIN);
         List<CustomerDto> response = service.getAll();
         HttpStatus status = HttpStatus.OK;
         return ResponseWrapper.entity(response, status);

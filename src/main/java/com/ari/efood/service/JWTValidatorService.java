@@ -3,6 +3,7 @@ package com.ari.efood.service;
 import com.ari.efood.auth.JWTUtils;
 import com.ari.efood.enums.Role;
 import com.ari.efood.exception.JWTException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+@Slf4j
 @Service
 public class JWTValidatorService extends JWTUtils {
     @Autowired
@@ -57,6 +59,7 @@ public class JWTValidatorService extends JWTUtils {
             }
 
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new JWTException("Authentication Failed");
         }
     }

@@ -67,17 +67,77 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     }
 
     private void sendOtp(String email, Integer otp) {
-        String subject = "[%1$d] : HungryHub login/signup OTP".formatted(otp);
+        String subject = "[%1$d] : HungryHub Login/Signup OTP".formatted(otp);
         String body = """
-                Dear Customer,
-                <br><br>
-                Your OTP for login/signup in EFood application is <span style="color:green">%1$d</span>
-                <br>
-                OTP valid for <span style="color:green">%2$d Minutes</span>
-                <br>
-                Use this OTP to validate your email. Don't share this email to anyone.
-                <br>
-                <h6>This email is system generated. Don't reply to this email</h6>
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>OTP Verification</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            background-color: #f4f4f4;
+                            margin: 0;
+                            padding: 0;
+                        }
+                
+                        .container {
+                            max-width: 600px;
+                            margin: 50px auto;
+                            background-color: #ffffff;
+                            padding: 20px;
+                            border-radius: 5px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                
+                        h1 {
+                            color: #333333;
+                        }
+                
+                        p {
+                            color: #666666;
+                        }
+                
+                        .otp-code {
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #009688;
+                        }
+                
+                        .btn {
+                            display: inline-block;
+                            padding: 10px 20px;
+                            background-color: #009688;
+                            color: #ffffff;
+                            text-decoration: none;
+                            border-radius: 3px;
+                        }
+                
+                        .footer {
+                            margin-top: 20px;
+                            text-align: center;
+                            color: #999999;
+                        }
+                    </style>
+                </head>
+                
+                <body>
+                    <div class="container">
+                        <h1>OTP Verification</h1>
+                        <p>Your OTP for Login/Signup in HungryHub application is:</p>
+                        <p class="otp-code">%1$d</p>
+                        <p>This code is valid for <span style="color:#009688">%2$d Minutes</span></p>
+                        <p>Please use this code to verify your email address.</p>
+                        <p>If you didn't request this code, you can safely ignore this email.</p>
+                        <p>Thank you!</p>
+                        <p class="footer">This email was sent by HungryHub</p>
+                        <hr>
+                        <h6>This email is system generated. Don't reply to this email<h6>
+                    </div>
+                </body>
+                </html>
                 """.formatted(otp, CustomerOtpService.VALID_FOR_IN_SECONDS / 60);
 
         CompletableFuture.runAsync(() -> {
