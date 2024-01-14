@@ -64,6 +64,13 @@ public class CustomExceptionHandlers {
         return ResponseWrapper.entity(message, status);
     }
 
+    @ExceptionHandler(PaymentException.class)
+    public ResponseEntity<ResponseWrapper<String>> handlePaymentException(PaymentException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseWrapper<List<String>>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<String> data = e.getFieldErrors()
