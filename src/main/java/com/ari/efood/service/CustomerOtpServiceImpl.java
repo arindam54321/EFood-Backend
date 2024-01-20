@@ -67,7 +67,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     }
 
     private void sendOtp(String email, Integer otp) {
-        String subject = "[%1$d] : HungryHub Login/Signup OTP".formatted(otp);
+        String subject = "Hungry Hub Login/Signup OTP";
         String body = """
                 <!DOCTYPE html>
                 <html lang="en">

@@ -67,4 +67,26 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return true;
     }
+
+    @Override
+    public CustomerDto updateCustomer(CustomerDto customerDto) throws CustomerException {
+        Optional<Customer> customer = repository.findByEmail(customerDto.getEmail());
+        if (customer.isEmpty()) {
+            throw new CustomerException("No customer found with the given email id");
+        }
+
+        CustomerDto customerDto1 = customer.get().toDto();
+
+        if (customerDto.getMobile() != null) {
+            customerDto1.setMobile(customerDto.getMobile());
+        }
+        if (customerDto.getFirstName() != null) {
+            customerDto1.setFirstName(customerDto.getFirstName());
+        }
+        if (customerDto.getLastName() != null) {
+            customerDto1.setLastName(customerDto.getLastName());
+        }
+
+        return repository.save(customerDto1.toEntity()).toDto();
+    }
 }

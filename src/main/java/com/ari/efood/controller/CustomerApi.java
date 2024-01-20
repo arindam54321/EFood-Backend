@@ -75,6 +75,19 @@ public class CustomerApi {
         return ResponseWrapper.entity(response, status, httpServletResponse.getHeaders(JWTUtils.JWT_HEADER_KEY));
     }
 
+    @PatchMapping(value = "update")
+    public ResponseEntity<ResponseWrapper<CustomerDto>> updateCustomer(
+            @RequestBody @Valid CustomerDto customer,
+            HttpServletResponse httpServletResponse
+    ) throws CustomerException, JoseException {
+        CustomerDto response = service.updateCustomer(customer);
+        HttpStatus status = HttpStatus.OK;
+
+        String jwt = JWTUtils.generateJWT(response.getId(), "", response.getEmail(), Role.CUSTOMER);
+        httpServletResponse.setHeader(JWTUtils.JWT_HEADER_KEY, jwt);
+        return ResponseWrapper.entity(response, status, httpServletResponse.getHeaders(JWTUtils.JWT_HEADER_KEY));
+    }
+
     @DeleteMapping(value = "delete")
     public ResponseEntity<ResponseWrapper<String>> deleteCustomer(
             @RequestHeader(name = JWTUtils.JWT_HEADER_KEY) String token,
