@@ -5,6 +5,7 @@ public enum Food {
     BURGER("burger"),
     BIRYANI("biryani"),
     CHINESE("chinese"),
+    ICECREAM("icecream"),
     MOMOS("momos");
 
     private final String TYPE;
