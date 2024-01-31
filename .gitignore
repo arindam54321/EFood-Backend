@@ -42,4 +42,9 @@ testem.log
 Thumbs.db
 
 # IntelliJ
-target/
+
+# Commenting these, for hosting them on Render
+#target/
+#!.mvn/wrapper/maven-wrapper.jar
+#!**/src/main/**/target/
+#!**/src/test/**/target/

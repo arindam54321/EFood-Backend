@@ -15,9 +15,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document
 public class CustomerOtp {
     @Id
-    String id;
+    private String id;
     @Field
-    String email;
+    private String email;
     @Field
-    Integer otp;
+    private Integer otp;
+    @Field
+    private Long validTill;
 }

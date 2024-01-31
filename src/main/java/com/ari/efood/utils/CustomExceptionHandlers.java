@@ -1,7 +1,6 @@
 package com.ari.efood.utils;
 
-import com.ari.efood.exception.CustomerException;
-import com.ari.efood.exception.CustomerOtpException;
+import com.ari.efood.exception.*;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -25,6 +24,48 @@ public class CustomExceptionHandlers {
 
     @ExceptionHandler(CustomerOtpException.class)
     public ResponseEntity<ResponseWrapper<String>> handleCustomerOtpException(CustomerOtpException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(LocationException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleLocationException(LocationException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(JWTException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleJWTException(JWTException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(AdminException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleAdminException(AdminException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(RestaurantException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleRestaurantException(RestaurantException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(FoodException.class)
+    public ResponseEntity<ResponseWrapper<String>> handleFoodException(FoodException e) {
+        String message = e.getMessage();
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return ResponseWrapper.entity(message, status);
+    }
+
+    @ExceptionHandler(PaymentException.class)
+    public ResponseEntity<ResponseWrapper<String>> handlePaymentException(PaymentException e) {
         String message = e.getMessage();
         HttpStatus status = HttpStatus.BAD_REQUEST;
         return ResponseWrapper.entity(message, status);
