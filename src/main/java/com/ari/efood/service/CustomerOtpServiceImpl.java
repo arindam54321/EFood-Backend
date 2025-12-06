@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -19,14 +20,14 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     @Autowired
     CustomerOtpRepository repository;
     @Autowired
-    EmailService emailService;
+    EmailServiceBrevo emailService;
     @Autowired
     ThreadPoolTaskExecutor executor;
 
     static Integer getOtp() {
         int min = 100001;
         int max = 999999;
-        return min + (int)(Math.random() * ((max - min) + 1));
+        return min + (int) (Math.random() * ((max - min) + 1));
     }
 
     @Override
@@ -59,7 +60,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
     public String validateOtp(String email, Integer otp) throws CustomerOtpException {
         Optional<CustomerOtp> customerOtp = repository.findByEmailAndOtp(email, otp);
         if (customerOtp.isPresent() &&
-            customerOtp.get().getValidTill() >= System.currentTimeMillis()) {
+                customerOtp.get().getValidTill() >= System.currentTimeMillis()) {
             return "OTP validated";
         } else {
             throw new CustomerOtpException("OTP invalid");
@@ -82,7 +83,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
                             margin: 0;
                             padding: 0;
                         }
-                
+                                
                         .container {
                             max-width: 600px;
                             margin: 50px auto;
@@ -91,21 +92,21 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
                             border-radius: 5px;
                             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                         }
-                
+                                
                         h1 {
                             color: #333333;
                         }
-                
+                                
                         p {
                             color: #666666;
                         }
-                
+                                
                         .otp-code {
                             font-size: 24px;
                             font-weight: bold;
                             color: #009688;
                         }
-                
+                                
                         .btn {
                             display: inline-block;
                             padding: 10px 20px;
@@ -114,7 +115,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
                             text-decoration: none;
                             border-radius: 3px;
                         }
-                
+                                
                         .footer {
                             margin-top: 20px;
                             text-align: center;
@@ -122,7 +123,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
                         }
                     </style>
                 </head>
-                
+                                
                 <body>
                     <div class="container">
                         <h1>OTP Verification</h1>
@@ -143,7 +144,7 @@ public class CustomerOtpServiceImpl implements CustomerOtpService {
         CompletableFuture.runAsync(() -> {
             try {
                 emailService.sendEmail(subject, body, List.of(email), null, null);
-            } catch (MessagingException e) {
+            } catch (MessagingException | IOException e) {
                 throw new RuntimeException(e);
             }
         }, executor);

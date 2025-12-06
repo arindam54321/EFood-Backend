@@ -23,6 +23,7 @@
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/controller/OrderApi.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/repository/CustomerOtpRepository.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/model/Food.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/EmailServiceBrevo.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/JWTValidatorService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/FoodService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/EmailService.java
