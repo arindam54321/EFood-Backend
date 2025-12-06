@@ -2,6 +2,7 @@ package com.ari.efood.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.mail.MessagingException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class EmailServiceBrevo {
 
@@ -61,7 +63,11 @@ public class EmailServiceBrevo {
         var resp = httpClient.execute(post);
         int status = resp.getCode();
         if (status < 200 || status >= 300) {
-            throw new MessagingException("Failed to send email via Brevo. Status: " + status);
+            String error = "Failed to send email via Brevo. Status: " + status;
+            log.error(error);
+            throw new MessagingException(error);
+        } else {
+            log.error("Email sent; to: {}, cc: {}, bcc: {}", tos, ccs, bccs);
         }
     }
 }
