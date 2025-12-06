@@ -45,7 +45,6 @@ public class EmailServiceBrevo {
         post.setHeader("content-type", "application/json");
         post.setHeader("api-key", apiKey);
 
-        // Build JSON body
         var body = new java.util.HashMap<String, Object>();
         body.put("sender", Map.of("email", fromEmail));
         body.put("to", tos.stream().map(email -> Map.of("email", email)).toList());
