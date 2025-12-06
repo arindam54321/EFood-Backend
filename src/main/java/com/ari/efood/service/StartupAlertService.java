@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.Instant;
@@ -23,7 +24,7 @@ import java.util.concurrent.CompletableFuture;
 @Component
 public class StartupAlertService {
     @Autowired
-    EmailService emailService;
+    EmailServiceBrevo emailService;
     @Autowired
     ThreadPoolTaskExecutor executor;
     @Value(value = "${spring.mail.username}")
@@ -117,7 +118,7 @@ public class StartupAlertService {
         CompletableFuture.runAsync(() -> {
             try {
                 emailService.sendEmail(subject, body, List.of(this.email), null, null);
-            } catch (MessagingException e) {
+            } catch (MessagingException | IOException e) {
                 throw new RuntimeException(e);
             }
         }, executor);
