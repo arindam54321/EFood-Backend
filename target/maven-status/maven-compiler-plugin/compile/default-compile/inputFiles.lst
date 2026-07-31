@@ -11,6 +11,7 @@
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/CustomerDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/QnaService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/StartupAlertService.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/WebAuditDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/utils/CustomExceptionHandlers.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/CustomerService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/RestaurantService.java
@@ -18,6 +19,8 @@
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/enums/Role.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/repository/OrderRepository.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/model/Admin.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/model/WebAudit.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/WebAuditServiceImpl.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/utils/ResponseWrapper.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/RazorpayService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/controller/CustomerOtpApi.java
@@ -45,12 +48,14 @@
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/RZPOrder.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/auth/JWTUtils.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/exception/RestaurantException.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/repository/WebAuditRepository.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/AdminDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/LocationDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/OrderRequestDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/LocationServiceImpl.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/FoodDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/RazorpayServiceImpl.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/WebAuditService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/model/CustomerOtp.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/exception/CustomerException.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/AdminService.java
@@ -63,6 +68,7 @@
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/CustomerOtpDto.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/OrderService.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/service/OrderServiceImpl.java
+/Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/controller/WebAuditApi.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/config/TreadPoolConfiguration.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/repository/CustomerRepository.java
 /Users/arindamnag/Documents/intelliJ/workspace/efood/src/main/java/com/ari/efood/dto/QnaDto.java
