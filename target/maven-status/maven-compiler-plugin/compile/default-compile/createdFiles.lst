@@ -9,6 +9,7 @@ com/ari/efood/model/Food.class
 com/ari/efood/model/Food$FoodBuilder.class
 com/ari/efood/service/CustomerServiceImpl.class
 com/ari/efood/repository/OrderRepository.class
+com/ari/efood/dto/WebAuditDto.class
 com/ari/efood/service/QnaService.class
 com/ari/efood/dto/RestaurantDto$RestaurantDtoBuilder.class
 com/ari/efood/enums/Role.class
@@ -21,6 +22,7 @@ com/ari/efood/dto/AdminDto.class
 com/ari/efood/service/CustomerOtpService.class
 com/ari/efood/exception/PaymentException.class
 com/ari/efood/exception/LocationException.class
+com/ari/efood/model/WebAudit.class
 com/ari/efood/service/QnaServiceImpl.class
 com/ari/efood/exception/RestaurantException.class
 com/ari/efood/repository/FoodRepository.class
@@ -30,9 +32,11 @@ com/ari/efood/service/EmailServiceBrevo.class
 com/ari/efood/dto/QnaDto.class
 com/ari/efood/model/Location$LocationBuilder.class
 com/ari/efood/dto/OrderDto$OrderDtoBuilder.class
+com/ari/efood/controller/WebAuditApi.class
 com/ari/efood/service/StartupAlertService.class
 com/ari/efood/dto/FoodDto$FoodDtoBuilder.class
 com/ari/efood/service/OrderService.class
+com/ari/efood/service/WebAuditServiceImpl.class
 com/ari/efood/controller/QnaApi.class
 com/ari/efood/repository/LocationRepository.class
 com/ari/efood/dto/PaymentOrderDto.class
@@ -54,14 +58,18 @@ com/ari/efood/model/Location.class
 com/ari/efood/auth/JWTUtils.class
 com/ari/efood/utils/ResponseWrapper$ResponseWrapperBuilder.class
 com/ari/efood/model/Qna.class
+com/ari/efood/repository/WebAuditRepository.class
 com/ari/efood/repository/CustomerOtpRepository.class
 com/ari/efood/dto/CustomerDto.class
 com/ari/efood/service/FoodService.class
+com/ari/efood/dto/WebAuditDto$WebAuditDtoBuilder.class
 com/ari/efood/service/LocationServiceImpl.class
+com/ari/efood/model/WebAudit$WebAuditBuilder.class
 com/ari/efood/dto/PaymentOrderDto$PaymentOrderDtoBuilder.class
 com/ari/efood/service/FoodServiceImpl.class
 com/ari/efood/model/Admin$AdminBuilder.class
 com/ari/efood/model/CustomerOtp$CustomerOtpBuilder.class
+com/ari/efood/service/WebAuditService.class
 com/ari/efood/dto/OrderRequestDto.class
 com/ari/efood/dto/QnaDto$QnaDtoBuilder.class
 com/ari/efood/controller/RestaurantApi.class
