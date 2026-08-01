@@ -1,5 +1,6 @@
 package com.ari.efood.dto;
 
+import com.ari.efood.model.VisitorAudit;
 import com.ari.efood.model.WebAudit;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,11 +31,19 @@ public class WebAuditDto {
                 .id(this.id)
                 .websiteId(this.websiteId)
                 .eventType(this.eventType)
-                .referrer(this.referrer)
-                .currentUrl(this.currentUrl)
                 .visitorId(this.visitorId)
                 .timestamp(this.timestamp)
                 .timezone(this.timezone)
+                .build();
+    }
+
+    public VisitorAudit toVisitorAuditEntity() {
+        return VisitorAudit.builder()
+                .id(this.id)
+                .websiteId(this.websiteId)
+                .referrer(this.referrer)
+                .currentUrl(this.currentUrl)
+                .visitorId(this.visitorId)
                 .language(this.language)
                 .screenWidth(this.screenWidth)
                 .screenHeight(this.screenHeight)
