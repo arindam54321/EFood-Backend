@@ -4,6 +4,7 @@ com/ari/efood/exception/CustomerOtpException.class
 com/ari/efood/exception/FoodException.class
 com/ari/efood/service/AdminServiceImpl.class
 com/ari/efood/exception/AdminException.class
+com/ari/efood/model/VisitorAudit$VisitorAuditBuilder.class
 com/ari/efood/dto/CustomerOtpDto$CustomerOtpDtoBuilder.class
 com/ari/efood/model/Food.class
 com/ari/efood/model/Food$FoodBuilder.class
@@ -50,6 +51,7 @@ com/ari/efood/controller/FoodApi.class
 com/ari/efood/controller/AdminApi.class
 com/ari/efood/service/RazorpayService.class
 com/ari/efood/dto/LocationDto.class
+com/ari/efood/repository/VisitorAuditRepository.class
 com/ari/efood/dto/CustomerOtpDto.class
 com/ari/efood/model/Admin.class
 com/ari/efood/dto/CustomerDto$CustomerDtoBuilder.class
@@ -89,6 +91,7 @@ com/ari/efood/config/ProjectConfigurations.class
 com/ari/efood/service/OrderServiceImpl.class
 com/ari/efood/enums/Food.class
 com/ari/efood/service/AdminService.class
+com/ari/efood/model/VisitorAudit.class
 com/ari/efood/service/RazorpayServiceImpl.class
 com/ari/efood/dto/OrderRequestDto$OrderRequestDtoBuilder.class
 com/ari/efood/model/Qna$QnaBuilder.class
